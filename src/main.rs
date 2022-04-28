@@ -8,11 +8,11 @@ use std::net::UdpSocket;
 struct Opts {
     // #[clap(long, default_value = "127.0.0.1:4000")]
     /// 自分のIP
-    #[clap(short, long, default_value = "localhost:4000")]
+    #[clap(short, long, default_value = "localhost:4001")]
     from_address: String,
 
     /// 宛先IP
-    #[clap(short, long, default_value = "localhost:4001")]
+    #[clap(short, long, default_value = "localhost:4000")]
     to_address: String,
 
     /// packet size
@@ -35,7 +35,7 @@ fn main() -> std::io::Result<()> {
     loop {
         for i in 0..opts.packet_count {
             let first_px = i * opts.packet_size;
-            let mut packet_data: String = first_px.to_string() + ",";
+            let mut packet_data: String = first_px.to_string();
             for _j in 0..opts.packet_size {
                 let r = &rng.gen_range(10.0..50.0).to_string();
                 packet_data = packet_data + "," + r;
