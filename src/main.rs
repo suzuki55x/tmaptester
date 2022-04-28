@@ -47,9 +47,9 @@ fn main() -> std::io::Result<()> {
 
             println!("{}", packet_data);
 
-            std::thread::sleep(std::time::Duration::from_millis(500));
+            std::thread::sleep(std::time::Duration::from_millis(50));
         }
 
-        std::thread::sleep(std::time::Duration::from_millis(1500));
+        std::thread::sleep(std::time::Duration::from_millis(1000));
     }
 }
