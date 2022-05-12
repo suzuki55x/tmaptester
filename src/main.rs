@@ -37,8 +37,12 @@ fn main() -> std::io::Result<()> {
             let first_px = i * opts.packet_size;
             let mut packet_data: String = first_px.to_string();
             for _j in 0..opts.packet_size {
-                let r = &rng.gen_range(10.0..50.0).to_string();
-                packet_data = packet_data + "," + r;
+                let r = if _j == opts.packet_size-1 {
+                    rng.gen_range(10.0..50.0).to_string()
+                } else {
+                    (10.0 + _j as f64 *2.5).to_string()
+                };
+                packet_data = packet_data + "," + &r;
             }
             // Udp送信
             socket
@@ -47,7 +51,7 @@ fn main() -> std::io::Result<()> {
 
             println!("{}", packet_data);
 
-            std::thread::sleep(std::time::Duration::from_millis(500));
+            std::thread::sleep(std::time::Duration::from_millis(50));
         }
 
         std::thread::sleep(std::time::Duration::from_millis(1000));
